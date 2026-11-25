@@ -1,0 +1,13 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Local exports, screenshots and scratch files (keep the repo source-only)
+*.pdf
+*.log
+scenario-exports/
+previews/
+node_modules/
