@@ -8,6 +8,7 @@ A guided, zero-build ROI and 3-year TCO calculator for **Sophos Sales and SE tea
 - **Expected / Conservative** toggle. Advanced assumptions are collapsed by default.
 - **Load example** presets, **Reset**, **Save/Load** (in the browser), **Export/Import JSON**, a **shareable link** (all inputs are stored in the URL), and a one-page **customer summary** for print or PDF.
 - **Offline.** No CDNs, no build step and no server. Double-click `index.html`, or host it on GitHub Pages.
+- **Clean, presentation-ready UI (v2).** Navy hero with live stat tiles, step tabs with counts, white cards, status pills, bar lists, a sticky Back/Next bar with live numbers, and an optional dark theme. Inline SVG icons only; responsive down to tablet width.
 
 > **Important:** every price in this tool is an **illustrative placeholder, not vendor pricing**. Replace the placeholders with the customer's invoices and your Sophos quote. Competitive statements are taken from public vendor pages and Sophos compare pages, and are cited in the app under *Method & sources*.
 
@@ -28,6 +29,7 @@ js/catalog.js       <- EDIT ME: currencies, default assumptions, Sophos products
 js/model.js         Pure calculation logic (also runs in Node for tests)
 js/app.js           UI: steps, events, persistence, share link, print summary
 tests/model.test.js Node test for the model (no dependencies)
+tools/build-single-file.js  Optional: bundles everything into ONE offline .html (node tools/build-single-file.js out.html)
 ```
 
 ## Editing prices, products and presets (no coding needed)

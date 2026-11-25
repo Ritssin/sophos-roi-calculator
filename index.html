@@ -1,61 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>Sophos ROI Calculator</title>
 <meta name="description" content="Guided ROI and 3-year TCO calculator for Sophos Sales and SE teams: compare a customer's current security stack with a Sophos proposal.">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="app-header">
-  <div class="brand">
-    <h1>Sophos ROI Calculator</h1>
-    <p>Current stack vs Sophos &middot; 3-year TCO, ROI, payback &amp; SOC impact &middot; for CFO, Procurement &amp; CISO conversations</p>
-  </div>
-  <div class="toolbar" role="toolbar" aria-label="Calculator actions">
-    <label for="presetSel">Load example</label>
-    <select id="presetSel"><option value="">Choose an example…</option></select>
-    <div class="seg" role="group" aria-label="Scenario">
-      <button type="button" data-scen="Expected" aria-pressed="true">Expected</button>
-      <button type="button" data-scen="Conservative" aria-pressed="false">Conservative</button>
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="logo"><span class="wm">SOPHOS</span><span class="vr" aria-hidden="true"></span><span class="app">ROI Calculator</span></div>
+    <div class="tb-right">
+      <button type="button" class="icon-btn dark-ghost" id="btnTheme" aria-label="Switch to dark theme"></button>
+      <div class="who"><span class="avatar" aria-hidden="true">SE</span><span class="who-t"><b>Sales Engineer</b><small>Sophos team</small></span></div>
     </div>
-    <button type="button" class="btn ghost" id="btnScenarios">Save / Load</button>
-    <button type="button" class="btn ghost" id="btnShare">Share link</button>
-    <button type="button" class="btn ghost" id="btnReset">Reset</button>
-    <button type="button" class="btn" id="btnPrint">Customer summary (PDF)</button>
   </div>
 </header>
-<div class="banner" role="note"><b>Illustrative defaults - replace with customer invoices and your Sophos quote.</b> No figure here is a published vendor price. Currency changes the symbol only (no FX conversion).</div>
 
-<nav class="stepper" aria-label="Steps" id="stepper"></nav>
+<div class="page">
+  <div class="page-head" role="toolbar" aria-label="Calculator actions">
+    <label class="select-wrap"><span class="sr-only">Load example</span><i data-ic="folder"></i>
+      <select id="presetSel"><option value="">Load example…</option></select></label>
+    <div class="actions">
+      <button type="button" class="btn ghost" id="btnScenarios"><i data-ic="save"></i>Save / Load</button>
+      <button type="button" class="btn ghost" id="btnShare"><i data-ic="share"></i>Share link</button>
+      <button type="button" class="btn ghost" id="btnExport2"><i data-ic="export"></i>Export</button>
+      <button type="button" class="btn primary" id="btnPrint"><i data-ic="download"></i>Download Report</button>
+    </div>
+  </div>
 
-<div class="layout">
+  <section id="hero" class="hero" aria-label="Summary"></section>
+
+  <div class="banner" role="note"><i data-ic="info"></i><span><b>Illustrative defaults: replace with customer invoices and your Sophos quote.</b> No figure here is a published vendor price. Currency changes the symbol only (no FX conversion).</span></div>
+
+  <div class="tabs-card" id="tabs"></div>
+
   <main id="main" tabindex="-1">
     <div id="step"></div>
   </main>
-  <aside class="summary" aria-label="Live summary">
-    <div class="panel" id="summary" aria-live="polite"></div>
-  </aside>
 </div>
+
+<div class="dock" id="dock"></div>
 
 <section id="printSummary" aria-hidden="true"></section>
 
 <dialog id="dlgScenarios" aria-labelledby="dlgScenTitle">
-  <div class="dlg-h"><h2 id="dlgScenTitle">Save / load scenarios</h2><button type="button" class="btn link" style="color:#fff" data-close>Close ✕</button></div>
+  <div class="dlg-h"><h2 id="dlgScenTitle">Save / load scenarios</h2><button type="button" class="icon-btn sm" data-close aria-label="Close"><i data-ic="x"></i></button></div>
   <div class="dlg-b">
     <label for="saveName" class="sr-only">Scenario name</label>
     <div class="row"><input type="text" id="saveName" placeholder="Scenario name, e.g. Acme - CrowdStrike displacement"><button type="button" class="btn" id="btnSave">Save</button></div>
     <p class="hint">Saved in this browser only (localStorage). Use export/import to move scenarios between machines or share with a colleague.</p>
     <ul class="saved" id="savedList"></ul>
-    <div class="row"><button type="button" class="btn light" id="btnExport">Export JSON</button>
-      <label class="btn light" for="fileImport" style="display:inline-block">Import JSON</label><input type="file" id="fileImport" accept="application/json,.json" class="sr-only"></div>
+    <div class="row"><button type="button" class="btn ghost" id="btnExport">Export JSON</button>
+      <label class="btn ghost" for="fileImport">Import JSON</label><input type="file" id="fileImport" accept="application/json,.json" class="sr-only"></div>
   </div>
 </dialog>
 
 <dialog id="dlgShare" aria-labelledby="dlgShareTitle">
-  <div class="dlg-h"><h2 id="dlgShareTitle">Share this scenario</h2><button type="button" class="btn link" style="color:#fff" data-close>Close ✕</button></div>
+  <div class="dlg-h"><h2 id="dlgShareTitle">Share this scenario</h2><button type="button" class="icon-btn sm" data-close aria-label="Close"><i data-ic="x"></i></button></div>
   <div class="dlg-b">
     <p class="hint">The link contains every input (no server, nothing uploaded). Anyone opening it sees the same numbers.</p>
     <label for="shareUrl" class="sr-only">Share link</label>
